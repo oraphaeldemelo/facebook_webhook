@@ -198,7 +198,7 @@ function callSendAPI(sender_psid, response) {
 function sendChatMultiplataform(sender_psid, receive){
   axios({
     method: 'POST',
-    url: ' https://bcf3c88d4fb5.ngrok.io/api/messenger',
+    url: ' https://710d992e357b.ngrok.io/api/messenger',
     data: {
       id:  sender_psid,
       message: receive.text
