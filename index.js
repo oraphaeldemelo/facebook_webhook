@@ -102,6 +102,14 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+app.post('/sendMessage', (req, res) => {
+	let id = req.body.id;
+	let message = req.body.message;
+  console.log(`Sending message to: id: ${id} and message: ${message}`)
+	callSendApi(id, message);
+
+})
+
 function handleMessage(sender_psid, received_message) {
   let response;
 
