@@ -28,6 +28,7 @@ const
   express = require('express'),
   body_parser = require('body-parser'),
   axios = require('axios'),
+  cors = require('cors'),
   app = express().use(body_parser.json()); // creates express http server
 
 // Sets server port and logs message on success
@@ -102,7 +103,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-app.post('/sendMessage', async (req, res) => {
+app.post('/sendMessage', cors(), async (req, res) => {
 	let id = req.body.id;
 	let message = req.body.message;
   console.log(`Sending message to: id: ${id} and message: ${message}`)
