@@ -22,6 +22,7 @@
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+const URL_TEST = process.env.URL_TEST;
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -30,6 +31,8 @@ const
   axios = require('axios'),
   cors = require('cors'),
   app = express().use(body_parser.json()); // creates express http server
+
+app.use(cors());
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -103,10 +106,9 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-app.post('/sendMessage', cors(), async (req, res) => {
+app.post('/sendMessage', async (req, res) => {
 	let id = req.body.id;
 	let message = req.body.message;
-  console.log(`Sending message to: id: ${id} and message: ${message}`)
 	await callSendApi(id, message);
 
 })
@@ -199,7 +201,7 @@ function callSendAPI(sender_psid, response) {
 function sendChatMultiplataform(sender_psid, receive){
   axios({
     method: 'POST',
-    url: ' https://710d992e357b.ngrok.io/api/messenger',
+    url: URL_TEST,
     data: {
       id:  sender_psid,
       message: receive.text
